@@ -26,9 +26,9 @@ tinymce.init({
       let tr = document.createElement("tr");
 
       let tdNombre = document.createElement("td");
-      //let tdDetalle = document.createElement("td");
       let tdGravedad = document.createElement("td");
       let tdCiudad = document.createElement("td");
+      let tdDetalle = document.createElement("td");
 
       //Debe de haber una forma mas eficaz de hacer esto pero esto fue lo unico que me funciono
       let ccrimen = document.createElement("i");
@@ -45,11 +45,13 @@ tinymce.init({
       tdGravedad.appendChild(ccrimen); 
 
       tdNombre.innerText = r.nombre + " "+ r.apellido;
-      //tdDetalle.innerHTML = r.detalle;
+      tdCiudad.innerText = r.ciudad;
+      tdDetalle.innerHTML = r.detalle;
 
       tr.appendChild(tdNombre);
-      //tr.appendChild(tdDetalle);
       tr.appendChild(tdGravedad);
+      tr.appendChild(tdDetalle);
+      tr.appendChild(tdCiudad);
 
       tbody.appendChild(tr);
     }
@@ -60,8 +62,8 @@ tinymce.init({
       let nombre = document.querySelector("#nombre-txt").value;
       let apellido = document.querySelector("#apellido-txt").value;
       let ccrimen = document.querySelector("#cantcrimen-txt").value;
-      //let detalle = tinymce.get("#detalle-txt").getContent();
-      //let gravedad = tinymce.get("gravedad-txt").getContent();
+      let ciudad = document.querySelector("#ciudad-txt").value;
+      let detalle = tinymce.get("detalle-txt").getContent();
       
    
       let reo = {};
@@ -69,8 +71,8 @@ tinymce.init({
       reo.nombre = nombre;
       reo.apellido = apellido;
       reo.ccrimen = ccrimen;
-      //reo.detalle = detalle;
-      //reo.gravedad = gravedad;
+      reo.detalle = detalle;
+      reo.ciudad = ciudad;
 
       reos.push(reo)
       cargarTabla();
