@@ -28,17 +28,18 @@ tinymce.init({
       let tdNombre = document.createElement("td");
       //let tdDetalle = document.createElement("td");
       let tdGravedad = document.createElement("td");
+      let tdCiudad = document.createElement("td");
 
       //Debe de haber una forma mas eficaz de hacer esto pero esto fue lo unico que me funciono
       let ccrimen = document.createElement("i");
       if(r.ccrimen == "1" || r.ccrimen == "2"|| r.ccrimen == "3"){
-        ccrimen.classList.add("fas","fa-exclamation","text-success","fa-3x")
+        ccrimen.classList.add("fas","fa-exclamation","text-success","fa-3x")//Gravedad Leve
       }else if(r.ccrimen == "4" || r.ccrimen == "5" || r.ccrimen == "6"){
-        ccrimen.classList.add("fas","fa-exclamation-circle","text-primary","fa-3x")
+        ccrimen.classList.add("fas","fa-exclamation-circle","text-primary","fa-3x")//Gravedad Grave
       }else if(r.ccrimen == "7"|| r.ccrimen == "8"|| r.ccrimen == "9"|| r.ccrimen == "10"|| r.ccrimen == "11"|| r.ccrimen == "12"|| r.ccrimen == "13"|| r.ccrimen == "14"){
-        ccrimen.classList.add("fas","fa-exclamation-triangle","text-warning","fa-3x")
+        ccrimen.classList.add("fas","fa-exclamation-triangle","text-warning","fa-3x")//Gravedad Peligroso
       }else if(r.ccrimen >="15"){
-        ccrimen.classList.add("fas","fa-skull-crossbones","text-danger","fa-3x")
+        ccrimen.classList.add("fas","fa-skull-crossbones","text-danger","fa-3x")//Gravedad Enemigo Social
       }
       tdGravedad.classList.add("text-center");
       tdGravedad.appendChild(ccrimen); 
