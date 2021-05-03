@@ -20,45 +20,36 @@ tinymce.init({
   
     let tbody = document.querySelector("#tbody-tabla");
     tbody.innerHTML = "";
+
     for(let i=0; i< reos.length; ++i){
       let r = reos[i];
-      //3. Por cada pokemon generar una fila de la tabla (tr)
       let tr = document.createElement("tr");
-      //4. Por cada atributo generar un td de la tabla
+
       let tdNombre = document.createElement("td");
-      let tdDetalle = document.createElement("td");
-      let tdCiudad = document.createElement("td");
+      //let tdDetalle = document.createElement("td");
       let tdGravedad = document.createElement("td");
 
-      //Definir lo que va en la tabla
-      tdNombre.innerText = r.nombre;
-      //To Do: El tipo tiene que ser un icono
-      let gravedad = document.createElement("i");
-      if(r.gravedad <= "3"){
-        //Tipo planta <i class="fas fa-leaf"></i>
-        gravedad.classList.add("fas","fa-leaf","text-success","fa-3x")
-      }else if(r.ciudad >="4"){
-        //Tipo agua <i class="fas fa-tint"></i>
-        gravedad.classList.add("fas","fa-tint","text-primary","fa-3x")
-      }else if(r.ciudad >="7"){
-        //Tipo fuego <i class="fas fa-fire"></i>
-        gravedad.classList.add("fas","fa-fire","text-danger","fa-3x")
-      }else if(r.ciudad >="15"){
-        //Tipo electrico <i class="fas fa-bolt"></i>
-        gravedad.classList.add("fas","fa-bolt","text-warning","fa-3x")
+      //Debe de haber una forma mas eficaz de hacer esto pero esto fue lo unico que me funciono
+      let ccrimen = document.createElement("i");
+      if(r.ccrimen == "1" || r.ccrimen == "2"|| r.ccrimen == "3"){
+        ccrimen.classList.add("fas","fa-exclamation","text-success","fa-3x")
+      }else if(r.ccrimen == "4" || r.ccrimen == "5" || r.ccrimen == "6"){
+        ccrimen.classList.add("fas","fa-exclamation-circle","text-primary","fa-3x")
+      }else if(r.ccrimen == "7"|| r.ccrimen == "8"|| r.ccrimen == "9"|| r.ccrimen == "10"|| r.ccrimen == "11"|| r.ccrimen == "12"|| r.ccrimen == "13"|| r.ccrimen == "14"){
+        ccrimen.classList.add("fas","fa-exclamation-triangle","text-warning","fa-3x")
+      }else if(r.ccrimen >="15"){
+        ccrimen.classList.add("fas","fa-skull-crossbones","text-danger","fa-3x")
       }
       tdGravedad.classList.add("text-center");
-      tdGravedad.appendChild(gravedad); 
-      //Para agregar un elemente dentro de otro se usa appendChild
-      //Cuando quiero definir txto se usa innerText
+      tdGravedad.appendChild(ccrimen); 
 
-      tdDetalle.innerHTML = r.detalle;
-      //5. Agregar los td al tr
+      tdNombre.innerText = r.nombre + " "+ r.apellido;
+      //tdDetalle.innerHTML = r.detalle;
+
       tr.appendChild(tdNombre);
-      tr.appendChild(tdDetalle);
-      tr.appendChild(tdCiudad);
+      //tr.appendChild(tdDetalle);
       tr.appendChild(tdGravedad);
-      //6. Agregar el tr a la tabla
+
       tbody.appendChild(tr);
     }
 
@@ -66,16 +57,18 @@ tinymce.init({
 
   document.querySelector("#registrar-btn").addEventListener("click", ()=>{
       let nombre = document.querySelector("#nombre-txt").value;
-      let ciudad = document.querySelector("#ciudad-select").value;
-      //let detalle = tinymce.get("#detalle-txt").getContent;
+      let apellido = document.querySelector("#apellido-txt").value;
+      let ccrimen = document.querySelector("#cantcrimen-txt").value;
+      //let detalle = tinymce.get("#detalle-txt").getContent();
       //let gravedad = tinymce.get("gravedad-txt").getContent();
       
-      //Crea un objeto
+   
       let reo = {};
-      //Crea un atributo
+      
       reo.nombre = nombre;
+      reo.apellido = apellido;
+      reo.ccrimen = ccrimen;
       //reo.detalle = detalle;
-      reo.ciudad = ciudad;
       //reo.gravedad = gravedad;
 
       reos.push(reo)
