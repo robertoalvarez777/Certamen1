@@ -1,6 +1,6 @@
 
 tinymce.init({
-    selector: '#descripcion-txt',
+    selector: '#detalle-txt',
     height: 200,
     menubar: false,
     plugins: [
@@ -15,59 +15,49 @@ tinymce.init({
     content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
   });
 
-  const pokemones = [];//Definir un arreglo
+  const reos = [];
   const cargarTabla = ()=>{
   
-    //1. Obtener una referencia a la tabla
     let tbody = document.querySelector("#tbody-tabla");
-    //Eliminar el contenido del tbody
     tbody.innerHTML = "";
-    //2. Recorrer la lista de pokemones
-    for(let i=0; i< pokemones.length; ++i){
-      let p = pokemones[i];
+    for(let i=0; i< reos.length; ++i){
+      let r = reos[i];
       //3. Por cada pokemon generar una fila de la tabla (tr)
       let tr = document.createElement("tr");
       //4. Por cada atributo generar un td de la tabla
-      let tdNro = document.createElement("td");
       let tdNombre = document.createElement("td");
-      let tdTipo = document.createElement("td");
-      let tdDescripcion = document.createElement("td");
-      let tdAcciones = document.createElement("td");
+      let tdDetalle = document.createElement("td");
+      let tdCiudad = document.createElement("td");
+      let tdGravedad = document.createElement("td");
 
       //Definir lo que va en la tabla
-      tdNro.innerText = i + 1;
-      tdNombre.innerText = p.nombre;
+      tdNombre.innerText = r.nombre;
       //To Do: El tipo tiene que ser un icono
-      let tipo = document.createElement("i");
-      if(p.tipo == "1"){
+      let gravedad = document.createElement("i");
+      if(r.gravedad <= "3"){
         //Tipo planta <i class="fas fa-leaf"></i>
-        tipo.classList.add("fas","fa-leaf","text-success","fa-3x")
-      }else if(p.tipo =="2"){
+        gravedad.classList.add("fas","fa-leaf","text-success","fa-3x")
+      }else if(r.ciudad >="4"){
         //Tipo agua <i class="fas fa-tint"></i>
-        tipo.classList.add("fas","fa-tint","text-primary","fa-3x")
-      }else if(p.tipo =="3"){
+        gravedad.classList.add("fas","fa-tint","text-primary","fa-3x")
+      }else if(r.ciudad >="7"){
         //Tipo fuego <i class="fas fa-fire"></i>
-        tipo.classList.add("fas","fa-fire","text-danger","fa-3x")
-      }else if(p.tipo =="4"){
+        gravedad.classList.add("fas","fa-fire","text-danger","fa-3x")
+      }else if(r.ciudad >="15"){
         //Tipo electrico <i class="fas fa-bolt"></i>
-        tipo.classList.add("fas","fa-bolt","text-warning","fa-3x")
-      }else if(p.tipo =="5"){
-        //Tipo normal <i class="fas fa-bullseye"></i>
-        tipo.classList.add("fas","fa-bullseye","text-info","fa-3x")
+        gravedad.classList.add("fas","fa-bolt","text-warning","fa-3x")
       }
-      tdTipo.classList.add("text-center");
-      tdTipo.appendChild(tipo); 
+      tdGravedad.classList.add("text-center");
+      tdGravedad.appendChild(gravedad); 
       //Para agregar un elemente dentro de otro se usa appendChild
       //Cuando quiero definir txto se usa innerText
 
-      tdDescripcion.innerHTML = p.descripcion;
-      //To do: Que hago con las acciones!
+      tdDetalle.innerHTML = r.detalle;
       //5. Agregar los td al tr
-      tr.appendChild(tdNro);
       tr.appendChild(tdNombre);
-      tr.appendChild(tdTipo);
-      tr.appendChild(tdDescripcion);
-      tr.appendChild(tdAcciones);
+      tr.appendChild(tdDetalle);
+      tr.appendChild(tdCiudad);
+      tr.appendChild(tdGravedad);
       //6. Agregar el tr a la tabla
       tbody.appendChild(tr);
     }
@@ -76,19 +66,19 @@ tinymce.init({
 
   document.querySelector("#registrar-btn").addEventListener("click", ()=>{
       let nombre = document.querySelector("#nombre-txt").value;
-      let tipo = document.querySelector("#detalle-select").value;
-      let legendario = document.querySelector("#ciudad-si").value;
-      let descripcion = tinymce.get("gravedad-txt").getContent();
+      let ciudad = document.querySelector("#ciudad-select").value;
+      //let detalle = tinymce.get("#detalle-txt").getContent;
+      //let gravedad = tinymce.get("gravedad-txt").getContent();
       
       //Crea un objeto
-      let pokemon = {};
+      let reo = {};
       //Crea un atributo
-      pokemon.nombre = nombre;
-      pokemon.tipo = tipo;
-      pokemon.legendario = legendario;
-      pokemon.descripcion = descripcion;
+      reo.nombre = nombre;
+      //reo.detalle = detalle;
+      reo.ciudad = ciudad;
+      //reo.gravedad = gravedad;
 
-      pokemones.push(pokemon)
+      reos.push(reo)
       cargarTabla();
       Swal.fire("Registro de Criminal Exitoso!", "Criminal ha sido ingresado", "info")
 
